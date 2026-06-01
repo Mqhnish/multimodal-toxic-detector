@@ -1,4 +1,4 @@
-# Multimodal Toxic Content Detector 🔍
+# Multimodal Toxic Content Detector 
 
 A content moderation pipeline that analyses **text, images, and audio** independently, then fuses the scores into a single verdict. Built using pre-trained transformer models from HuggingFace.
 
@@ -59,18 +59,6 @@ Input ──┬── Text  → toxic-bert    → toxicity score
 
 **Late fusion** (combining scores at the end rather than features in the middle) is the simplest multimodal fusion strategy. More advanced approaches would weight modalities by confidence or train a learned combiner.
 
----
-
-## Bugs fixed from original version
-
-| Bug | Fix |
-|---|---|
-| Label mismatch: code checked `'non-toxic'` but bert outputs `'non_toxic'` (underscore) → always fell back to score=0.5 | Fixed label string |
-| Wrong image model: `umm-maybe/AI-image-detector` detects AI-generated images, not NSFW content | Replaced with `Falconsai/nsfw_image_detection` |
-| Audio labels assumed fixed — vary by model version | Now checks against a set of known aggressive labels |
-| No graceful error handling if a model fails to load | Each modality wrapped in try/except independently |
-
----
 
 ## What I learned
 
